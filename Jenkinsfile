@@ -1,10 +1,18 @@
+import java.text.SimpleDateFormat
+
 node {
-    def app
+    parameters {
+    	string(name: 'BRANCH', defaultValue: 'develop', description: '')
+    }
 
-    stage('Clone repository') {
+    stage('Src Checkout') {
+    	git branch: '${BRANCH}',
+    		credentialsId: '<git credentials id>',
+    		url: '<git repo url>'
+    }
 
-
-        checkout scm
+    stage('Build') {
+     	sh './gradlew bootJar'
     }
 
     stage('Build image') {
@@ -13,8 +21,6 @@ node {
     }
 
     stage('Test image') {
-
-
         app.inside {
             sh 'echo "Tests passed"'
         }
