@@ -7,8 +7,8 @@ node {
 
     stage('Src Checkout') {
     	git branch: '${BRANCH}',
-    		credentialsId: '<git credentials id>',
-    		url: '<git repo url>'
+    		credentialsId: 'dokkl',
+    		url: 'https://github.com/dokkl/hello-jib.git'
     }
 
     stage('Build') {
